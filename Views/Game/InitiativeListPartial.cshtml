@@ -1,0 +1,25 @@
+@model List<DMBuddy.Models.Character>
+
+<table border=1>
+    <tr>
+        <th>Name</th>
+        <th>Initiative</th>
+        <th>HP</th>
+        <th>AC</th>
+        <th>Passive Perception</th>
+        <th>Conditions</th>
+    </tr>
+    
+        @foreach(var player in @Model)
+        {
+            <tr>
+                <td>@player.Name</td>
+                <td>@player.Initiative</td>
+                <td>@player.HP</td>
+                <td>@player.AC</td>
+                <td>@player.PassivePerception</td>
+                <td>TBD</td>
+            </tr>
+        }
+    
+</table>

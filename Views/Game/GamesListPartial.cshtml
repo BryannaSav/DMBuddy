@@ -1,0 +1,17 @@
+@model List<DMBuddy.Models.Combat>
+
+    <h3>Games List</h3>
+    <table border=1>
+        <tr>
+            <th>Name</th>
+            <th>Action</th>   
+        </tr>
+
+    @{foreach(var fight in @Model){
+        <tr>
+            <td><a href="/ShowGame/@fight.CombatId">@fight.CombatName</a></td>
+            <td><a href="/DeleteGame/@fight.CombatId">DELETE</a></td>
+        </tr>
+    }
+    }
+    </table>
