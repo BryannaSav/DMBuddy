@@ -1,0 +1,42 @@
+@model List<DMBuddy.Models.Combat>
+@using DMBuddy.Models
+    @foreach(var fight in @Model){
+        <tr>
+            @if(@ViewBag.GameUpdateToggle == @fight.CombatId){
+                <!-- DISPLAYS IF THE UPDATE BUTTON HAS BEEN PRESSED ONCE -->
+                @Html.Partial("GamesPartials/UpdateGamePartial", (Combat)@ViewBag.uCombat)
+            }else{
+
+            <td>
+                <a href="/ShowGame/@fight.CombatId">@fight.CombatName</a>
+            </td>
+
+            <td>
+                
+                    @if(@ViewBag.ConfirmDeleteGame == @fight.CombatId){
+                        <!-- DISPLAYS IF THE DELETE BUTTON HAS BEEN HIT ONCE -->
+                        <form style="Display:Inline-Block" action="DeleteGame/@fight.CombatId">
+                            <input type="submit" value="CONFIRM DELETE">
+                        </form>  
+                        <form style="Display:Inline-Block" action="CancelChangeGame">
+                            <input type="submit" value="Cancel">
+                        </form> 
+                    }else{
+                        <!-- DISPLAYS IF NO OTHER BUTTON HAVE BEEN HIT YET -->
+                        <form style="Display:Inline-Block" action="ConfirmDeleteGame/@fight.CombatId">
+                            <input type="submit" value="Delete">
+                        </form>
+                        <form style="Display:Inline-Block" action="ToggleUpdateGame/@fight.CombatId">
+                            <input type="submit" value="Update">
+                        </form>
+                    }   
+                
+                
+                
+                  
+            </td>
+            }
+        </tr>
+        
+    }
+    

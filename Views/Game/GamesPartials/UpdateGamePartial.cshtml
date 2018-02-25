@@ -1,0 +1,18 @@
+@model DMBuddy.Models.Combat
+
+<tr>
+    <form action="/UpdateGame" method="Post">
+        <td>
+            <input asp-for="CombatName"><br>
+            <input type="hidden" name="CombatId" value=@Model.CombatId><br>
+            <span class="error" asp-validation-for="CombatName"></span>
+        </td>
+        <td>
+            <input type="submit" value="Save">
+        </form>   
+        <form action="CancelChangeGame">
+            <input type="submit" value="Cancel">
+        </form> 
+        </td>
+    
+</tr>

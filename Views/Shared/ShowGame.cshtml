@@ -1,0 +1,20 @@
+﻿@using DMBuddy.Models
+<h2>@ViewBag.curCombat.CombatName</h2>
+<table border=1>
+    <tr>
+        <th>Name</th>
+        <th>Initiative</th>
+        <th>HP</th>
+        <th>AC</th>
+        <th>Passive Perception</th>
+        <th>Comments</th>
+        <th>Options</th>
+    </tr>
+    @Html.Partial("ShowGamesPartials/InitiativeListPartial", (List<Character>)@ViewBag.charactersInit)
+    @if(@ViewBag.UpdateToggle == null){
+        @Html.Partial("ShowGamesPartials/AddCharacterPartial")
+    }
+    
+</table>
+
+<a href="/Games">Back To Games</a>

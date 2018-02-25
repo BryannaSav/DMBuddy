@@ -1,0 +1,13 @@
+@model DMBuddy.Models.CombatViewModel
+
+<tr>
+    <form action="/CreateGame" method="Post">
+        <td>
+            <input asp-for="CombatName"><br>
+            <span class="error" asp-validation-for="CombatName"></span>
+        </td>
+        <td>
+            <input type="submit" value="Create">    
+        </td>
+    </form>
+</tr>

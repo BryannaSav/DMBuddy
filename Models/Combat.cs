@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DMBuddy.Models
 {
@@ -8,6 +9,7 @@ namespace DMBuddy.Models
 
         public int CurTurn { get; set; }
 
+        [Required]
         public string CombatName { get; set; }
 
         public int UserId { get; set; }

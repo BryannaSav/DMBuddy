@@ -1,0 +1,39 @@
+@model DMBuddy.Models.Character
+<tr>
+<form action="/AddCharacter" method="Post">
+
+    <td>
+        <input asp-for="Name"><br>
+        <span class="error" asp-validation-for="Name"></span>
+    </td>
+
+    <td>
+        <input asp-for="Initiative"><br>
+        <span class="error" asp-validation-for="Initiative"></span>  
+    </td>
+    
+    <td>
+        <input asp-for="HP"><br>
+        <span class="error" asp-validation-for="HP"></span>   
+    </td>
+
+    <td>
+        <input asp-for="AC"><br>
+        <span class="error" asp-validation-for="AC"></span>    
+    </td>
+    
+    <td>
+        <input asp-for="PassivePerception"><br>
+        <span class="error" asp-validation-for="PassivePerception"></span>
+    </td>
+    <td>
+        <input asp-for="Comments"><br>
+        <span class="error" asp-validation-for="Comments"></span>
+    </td>
+    <td>
+        <input type="hidden" name="CombatId" value=@ViewBag.Id>
+        <input type="submit" value="Create">    
+    </td>
+    
+</form>
+</tr>

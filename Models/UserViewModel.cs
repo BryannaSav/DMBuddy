@@ -16,13 +16,13 @@ namespace DMBuddy.Models
         [MinLength(8)]
         [RegularExpression("^[a-zA-Z0-9]+$")]
         [Display(Name="Password: ")]
-        // [DataType(DataType.Password)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [Compare("Password")]
         [Display(Name="Confirm Password: ")]
-        // [DataType(DataType.Password)]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
     }

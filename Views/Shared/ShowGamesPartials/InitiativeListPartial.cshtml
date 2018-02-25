@@ -1,0 +1,44 @@
+@model List<DMBuddy.Models.Character>
+@using DMBuddy.Models
+
+        @foreach(var player in @Model)
+        {
+            <tr>
+                @{
+                    @if(@player.CharacterId == @ViewBag.UpdateToggle)
+                    {
+                        @Html.Partial("ShowGamesPartials/UpdateCharacterPartial", (Character)@ViewBag.UpdateCharacter)
+                    }else{
+                        <td>@player.Name</td>
+                        <td>@player.Initiative</td>
+                        <td>@player.HP</td>
+                        <td>@player.AC</td>
+                        <td>@player.PassivePerception</td>
+                        <td>@player.Comments</td>
+                   
+                        <td>  
+                            @if(@player.CharacterId == @ViewBag.ConfirmDeleteCharacter){
+                                <form style="Display: Inline-Block" action="/DeleteCharacter" method="post">
+                                    <input type="hidden" name="CurCombatId" value=@player.CombatId>
+                                    <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
+                                    <input type="submit" value="CONFIRM DELETE">
+                                </form>   
+                            }else{
+                                <form style="Display: Inline-Block" action="/ConfirmDeleteCharacter" method="post">
+                                    <input type="hidden" name="CurCombatId" value=@player.CombatId>
+                                    <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
+                                    <input type="submit" value="Delete">
+                                </form>     
+                            }
+                            <form style="Display: Inline-Block" action="/ToggleUpdateCharacter" method="post">
+                                <input type="hidden" name="CurCombatId" value=@player.CombatId>
+                                <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
+                                <input type="submit" value="Update">
+                            </form>
+                        </td>
+                    }
+                }
+            </tr>
+            
+        }
+    
