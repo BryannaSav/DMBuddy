@@ -5,37 +5,45 @@
         {
             <tr>
                 @{
+                    string turnTag = "span";
                     @if(@player.CharacterId == @ViewBag.UpdateToggle)
                     {
                         @Html.Partial("ShowGamesPartials/UpdateCharacterPartial", (Character)@ViewBag.UpdateCharacter)
                     }else{
-                        <td>@player.Name</td>
-                        <td>@player.Initiative</td>
-                        <td>@player.HP</td>
-                        <td>@player.AC</td>
-                        <td>@player.PassivePerception</td>
-                        <td>@player.Comments</td>
+                        @if(@ViewBag.charactersInit[@ViewBag.curCombat.CurTurn].CharacterId == @player.CharacterId){
+                             turnTag = "strong";
+                        }
+                            {
+                            <td><@turnTag>@player.Name</@turnTag></td>
+                            <td><@turnTag>@player.Initiative</@turnTag></td>
+                            <td><@turnTag>@player.HP</@turnTag></td>
+                            <td><@turnTag>@player.AC</@turnTag></td>
+                            <td><@turnTag>@player.PassivePerception</@turnTag></td>
+                            <td><@turnTag>@player.Comments</@turnTag></td>   
                    
-                        <td>  
-                            @if(@player.CharacterId == @ViewBag.ConfirmDeleteCharacter){
-                                <form style="Display: Inline-Block" action="/DeleteCharacter" method="post">
+                            <td>
+                            <@turnTag>  
+                                @if(@player.CharacterId == @ViewBag.ConfirmDeleteCharacter){
+                                    <form style="Display: Inline-Block" action="/DeleteCharacter" method="post">
+                                        <input type="hidden" name="CurCombatId" value=@player.CombatId>
+                                        <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
+                                        <input type="submit" value="CONFIRM DELETE">
+                                    </form>   
+                                }else{
+                                    <form style="Display: Inline-Block" action="/ConfirmDeleteCharacter" method="post">
+                                        <input type="hidden" name="CurCombatId" value=@player.CombatId>
+                                        <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
+                                        <input type="submit" value="Delete">
+                                    </form>     
+                                }
+                                <form style="Display: Inline-Block" action="/ToggleUpdateCharacter" method="post">
                                     <input type="hidden" name="CurCombatId" value=@player.CombatId>
                                     <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
-                                    <input type="submit" value="CONFIRM DELETE">
-                                </form>   
-                            }else{
-                                <form style="Display: Inline-Block" action="/ConfirmDeleteCharacter" method="post">
-                                    <input type="hidden" name="CurCombatId" value=@player.CombatId>
-                                    <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
-                                    <input type="submit" value="Delete">
-                                </form>     
-                            }
-                            <form style="Display: Inline-Block" action="/ToggleUpdateCharacter" method="post">
-                                <input type="hidden" name="CurCombatId" value=@player.CombatId>
-                                <input type="hidden" name="CurPlayerId" value=@player.CharacterId>
-                                <input type="submit" value="Update">
-                            </form>
-                        </td>
+                                    <input type="submit" value="Update">
+                                </form>
+                            </@turnTag>
+                            </td>
+                        }
                     }
                 }
             </tr>

@@ -79,6 +79,7 @@ namespace DMBuddy.Controllers
             List<Character> charactersInit = curCombat.Characters.OrderByDescending(person => person.Initiative).ToList();
             ViewBag.curCombat = curCombat;
             ViewBag.charactersInit = charactersInit;
+            ViewBag.numOfPlayers = charactersInit.Count();
 
             return View("ShowGame");
         }
@@ -181,7 +182,6 @@ namespace DMBuddy.Controllers
         public IActionResult CancelChangeGame(){
             return RedirectToAction("Games");
         }
-
 
         public IActionResult Error()
         {

@@ -17,4 +17,25 @@
     
 </table>
 
+@if(@ViewBag.numOfPlayers > 0){
+
+    <h3>Current Turn: @ViewBag.charactersInit[@ViewBag.curCombat.CurTurn].Name</h3>
+
+    <form action="/NextTurn" method="post">
+
+        <label>Damage Taken: </label>
+        <input type="number" name="damage">
+
+        <label>Heals Received: </label>
+        <input type="number" name="heals">
+
+        <input type="hidden" name="CombatId" value=@ViewBag.curCombat.CombatId>
+
+        <input type="hidden" name="CharacterId" value=@ViewBag.charactersInit[@ViewBag.curCombat.CurTurn].CharacterId>
+
+        <input type="submit" value="Finish Turn">
+        
+    </form>
+    <p>*Character must have a valid HP value for damage or health to affect total.</p>
+}
 <a href="/Games">Back To Games</a>

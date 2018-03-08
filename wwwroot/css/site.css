@@ -35,3 +35,18 @@ textarea {
         display: none;
     }
 }
+
+.spellCard {
+    width: 325px;
+    padding: 5px;
+    margin: 5px;
+    border: black solid 1px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.rollerForms{
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+}

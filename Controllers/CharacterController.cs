@@ -50,6 +50,7 @@ namespace DMBuddy.Controllers
             List<Character> charactersInit = curCombat.Characters.OrderByDescending(person => person.Initiative).ToList();
             ViewBag.curCombat = curCombat;
             ViewBag.charactersInit = charactersInit;
+            ViewBag.numOfPlayers = charactersInit.Count();
 
             //PAGE RENDER SETUP FOR IF INFO IS NOT VALID
             if(!ModelState.IsValid){
@@ -118,6 +119,7 @@ namespace DMBuddy.Controllers
             List<Character> charactersInit = curCombat.Characters.OrderByDescending(person => person.Initiative).ToList();
             ViewBag.curCombat = curCombat;
             ViewBag.charactersInit = charactersInit;
+            ViewBag.numOfPlayers = charactersInit.Count();
 
             //PAGE RENDER SETUP FOR IF INFO IS NOT VALID 
             if(!ModelState.IsValid){
@@ -132,8 +134,30 @@ namespace DMBuddy.Controllers
         [Route("CancelUpdate/{curCombatId}")]
         //REMOVES UPDATE/CANCEL BUTTONS AND BRINGS BACK CREATE FORM
         public IActionResult CancelUpdate(int CurCombatId){
-            System.Console.WriteLine(CurCombatId);
+            // System.Console.WriteLine(CurCombatId);
             return RedirectToAction("ShowGame", "Game", new {id = CurCombatId});
+        }
+
+        [HttpPost]
+        [Route("NextTurn")]
+        public IActionResult NextTurn(int damage, int heals, int CharacterId, int CombatId){
+            Character curUser = _context.character.SingleOrDefault(player => player.CharacterId==CharacterId);
+            if(curUser.HP != null){
+                curUser.HP -= damage;
+                curUser.HP += heals;
+                if(curUser.HP < 0){
+                    curUser.HP = 0;
+                }
+            }
+            Combat curCombat = _context.combat.Include(fight => fight.Characters).SingleOrDefault(fight => fight.CombatId == CombatId);
+            int max = (curCombat.Characters.Count() - 1);
+            if(curCombat.CurTurn == max){
+                curCombat.CurTurn=0;
+            }else{
+                curCombat.CurTurn++;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("ShowGame", "Game", new {id = CombatId});
         }
 
 

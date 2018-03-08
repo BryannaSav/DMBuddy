@@ -1,1 +1,127 @@
-<h1>Success!</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Roller</title>
+    </head>
+    <body>
+        <div class="rollerForms">
+
+            @{
+                @if(@ViewBag.rollerToggle == null){
+                <h4>Classic Dice Roller</h4>
+                <form action="/rollClassicDice" method="post">
+                    <p>Roll 
+                        <input type="number" name="diceQuanitiy" placeholder="Quantity">
+                        d 
+                        <select name="diceType">
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="20">20</option>
+                            <option value="100">100</option>
+                        </select>
+                        <input type="submit" value="Roll!">
+                    </p>
+                </form>
+
+                <a href="/rollerToggle">Custom Dice Roller</a>
+            }else{
+                <h4>Custom Dice Roller</h4>
+                <form action="/rollCustomDice" method="post">
+                    <p>Roll 
+                        <input type="number" name="diceQuanitiy" placeholder="Quantity"> 
+                        d 
+                        <input type="number" name="diceType" placeholder="Dice Sides">
+                        + 
+                        <input type="number" name="modifier" placeholder="Modifier"> 
+                        <input type="submit" value="Roll!">
+                    </p>
+                </form>
+
+                <a href="/rollerToggle">Classic Dice Roller</a>
+            }
+            }
+
+        
+            @if(@ViewBag.rollResult !=null){
+                <h2>@ViewBag.rollResult</h2>    
+            }
+            
+            <h3>Spell Lookup</h3> 
+            <form action="/getSpell" method="post">
+                <input type="number" name="spellId">
+                <input type="submit" value="Get Spell!">
+            </form>
+        </div>
+        
+            
+            @if(@ViewBag.spellInfo != null){
+            <div class="spellCard">
+                <h4>@ViewBag.spellInfo["name"]</h4>
+            
+                @if(@ViewBag.spellInfo.ContainsKey("concentration")){
+                    <span>Concentration: @ViewBag.spellInfo["concentration"]</span>
+                }
+            
+                @if(@ViewBag.spellInfo.ContainsKey("ritual")){
+                    <span>Ritual: @ViewBag.spellInfo["ritual"]</span>
+                }
+            
+                @if(@ViewBag.spellInfo.ContainsKey("page")){
+                    <span>Page: @ViewBag.spellInfo["page"]</span>
+                }
+            
+                @if(@ViewBag.spellInfo.ContainsKey("level")){
+                    <span>Level: @ViewBag.spellInfo["level"]</span>
+                }
+            
+                @if(@ViewBag.spellInfo.ContainsKey("desc")){
+                    <p>@foreach(var d in @ViewBag.spellInfo["desc"])
+                    {
+                        @d
+                    }</p> 
+                }
+            
+                @if(@ViewBag.spellInfo.ContainsKey("higher_level")){
+                    <p>@foreach(var h in @ViewBag.spellInfo["higher_level"])
+                    {
+                        @h
+                    }</p> 
+                }
+
+                @if(@ViewBag.spellInfo.ContainsKey("range")){
+                    <span>Range: @ViewBag.spellInfo["range"][0]</span>
+                }
+
+                @if(@ViewBag.spellInfo.ContainsKey("level")){
+                    <span>Level: @ViewBag.spellInfo["level"]</span>
+                }
+
+                @if(@ViewBag.spellInfo.ContainsKey("components")){
+                    <span>Components: @foreach(var c in @ViewBag.spellInfo["components"])
+                    {
+                        @c
+                    }</span> 
+                }
+
+                @if(@ViewBag.spellInfo.ContainsKey("material")){
+                    <span>Material: @ViewBag.spellInfo["material"]</span>
+                }
+
+                @if(@ViewBag.spellInfo.ContainsKey("casting_time")){
+                    <span>Casting Time: @ViewBag.spellInfo["casting_time"]</span>
+                }   
+
+                @if(@ViewBag.spellInfo.ContainsKey("duration")){
+                    <span>Duration: @ViewBag.spellInfo["duration"]</span>
+                }    
+            </div>        
+            }
+        
+    </body>
+</html>
