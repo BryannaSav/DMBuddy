@@ -67,10 +67,14 @@ namespace DMBuddy.Controllers
                 ViewBag.UpdateCharacter = UpdateCharacter;
             }
 
-            //FOR USE OF CHARACTER CONTROLLER SETS UP VIEWBAG DATA FOR DELET CHARACTER METHOD
+            //FOR USE OF CHARACTER CONTROLLER SETS UP VIEWBAG DATA FOR DELETE CHARACTER METHOD
             if(TempData["ConfirmDeleteCharacter"]!=null){
                 ViewBag.ConfirmDeleteCharacter = TempData["ConfirmDeleteCharacter"];
             }
+
+            //FOR USE OF DICE ROLLER TOGGLE AND DISPLAY MECHANICS
+            ViewBag.rollResult = TempData["rollResult"];
+            ViewBag.rollerToggle = HttpContext.Session.GetString("rollerToggle");
 
             //PAGE LOAD DB SETUP SAVED TO VIEWBAGS (would have used model binding if there weren't so many forms through partials)
             //--NOTE: come back to and see if viewbag info/query can be streamlined
@@ -80,7 +84,6 @@ namespace DMBuddy.Controllers
             ViewBag.curCombat = curCombat;
             ViewBag.charactersInit = charactersInit;
             ViewBag.numOfPlayers = charactersInit.Count();
-
             return View("ShowGame");
         }
 

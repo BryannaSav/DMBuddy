@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Roller</title>
+    </head>
+    <body>    
+        <h3>Spell Lookup</h3> 
+        <form action="/getSpell" method="post">
+            <input type="text" name="spellSearch">
+            <input type="submit" value="Get Spell!">
+        </form>
+
+        @if(@ViewBag.spellInfo != null){
+        <div class="spellCard">
+            <h4>@ViewBag.spellInfo["name"]</h4>
+        
+            @if(@ViewBag.spellInfo.ContainsKey("concentration")){
+                <span>Concentration: @ViewBag.spellInfo["concentration"]</span>
+            }
+        
+            @if(@ViewBag.spellInfo.ContainsKey("ritual")){
+                <span>Ritual: @ViewBag.spellInfo["ritual"]</span>
+            }
+        
+            @if(@ViewBag.spellInfo.ContainsKey("page")){
+                <span>Page: @ViewBag.spellInfo["page"]</span>
+            }
+        
+            @if(@ViewBag.spellInfo.ContainsKey("level")){
+                <span>Level: @ViewBag.spellInfo["level"]</span>
+            }
+        
+            @if(@ViewBag.spellInfo.ContainsKey("desc")){
+                <p>@foreach(var d in @ViewBag.spellInfo["desc"])
+                {
+                    @d
+                }</p> 
+            }
+        
+            @if(@ViewBag.spellInfo.ContainsKey("higher_level")){
+                <p>@foreach(var h in @ViewBag.spellInfo["higher_level"])
+                {
+                    @h
+                }</p> 
+            }
+
+            @if(@ViewBag.spellInfo.ContainsKey("range")){
+                <span>Range: @ViewBag.spellInfo["range"][0]</span>
+            }
+
+            @if(@ViewBag.spellInfo.ContainsKey("level")){
+                <span>Level: @ViewBag.spellInfo["level"]</span>
+            }
+
+            @if(@ViewBag.spellInfo.ContainsKey("components")){
+                <span>Components: @foreach(var c in @ViewBag.spellInfo["components"])
+                {
+                    @c
+                }</span> 
+            }
+
+            @if(@ViewBag.spellInfo.ContainsKey("material")){
+                <span>Material: @ViewBag.spellInfo["material"]</span>
+            }
+
+            @if(@ViewBag.spellInfo.ContainsKey("casting_time")){
+                <span>Casting Time: @ViewBag.spellInfo["casting_time"]</span>
+            }   
+
+            @if(@ViewBag.spellInfo.ContainsKey("duration")){
+                <span>Duration: @ViewBag.spellInfo["duration"]</span>
+            }    
+        </div>        
+        }
+        
+    </body>
+</html>

@@ -38,4 +38,71 @@
     </form>
     <p>*Character must have a valid HP value for damage or health to affect total.</p>
 }
-<a href="/Games">Back To Games</a>
+<!-- <a href="/Games">Back To Games</a> -->
+<br>
+<form action="/Games">
+    <button>Back To Games</button>
+</form>
+<br>
+
+<div class="rollerForms">
+
+    @{
+        @if(@ViewBag.rollerToggle == null){
+        <h4>Classic Dice Roller</h4>
+        <form action="/rollClassicDice" method="post">
+            <p>Roll 
+                <input type="number" name="diceQuanitiy" placeholder="Quantity">
+                d 
+                <select name="diceType">
+                    <option value="4">4</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                    <option value="20">20</option>
+                    <option value="100">100</option>
+                </select>
+                <input type="submit" value="Roll!">
+            </p>
+            <input type="hidden" name="CombatId" value=@ViewBag.curCombat.CombatId>
+        </form>
+
+        <!-- <a href="/rollerToggle">Custom Dice Roller</a> -->
+
+        <form action="/rollerToggle" method="post">
+            <input type="hidden" name="CombatId" value=@ViewBag.curCombat.CombatId>
+            <input type="submit" value="Custom Dice Roller">
+        </form>
+
+    }else{
+        <h4>Custom Dice Roller</h4>
+        <form action="/rollCustomDice" method="post">
+            <p>Roll 
+                <input type="number" name="diceQuanitiy" placeholder="Quantity"> 
+                d 
+                <input type="number" name="diceType" placeholder="Dice Sides">
+                + 
+                <input type="number" name="modifier" placeholder="Modifier"> 
+                <input type="submit" value="Roll!">
+            </p>
+            <input type="hidden" name="CombatId" value=@ViewBag.curCombat.CombatId>
+        </form>
+
+        <!-- <a href="/rollerToggle">Classic Dice Roller</a> -->
+        <form action="/rollerToggle" method="post">
+            <input type="hidden" name="CombatId" value=@ViewBag.curCombat.CombatId>
+            <input type="submit" value="Classic Dice Roller">
+        </form>
+    }
+    }
+    <form action="/rollDTwenty" method="post">
+        <input type="hidden" name="CombatId" value=@ViewBag.curCombat.CombatId>
+        <input type="submit" value="Roll A D20">
+    </form>
+
+
+    @if(@ViewBag.rollResult !=null){
+        <h2>@ViewBag.rollResult</h2>    
+    }
+
